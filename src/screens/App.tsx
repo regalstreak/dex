@@ -13,6 +13,8 @@ import HomeScreen from './HomeScreen';
 import VRScene from './VRScene';
 import ProfileScreen from './Profile';
 import COLORS from '../assets/fonts/colors';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
   const App = () => {
     const _renderIcon = (routeName: string, selectedTab: string) => {
@@ -50,6 +52,7 @@ import COLORS from '../assets/fonts/colors';
     };
 
     return (
+      <SafeAreaProvider>
       <View style={{ flex: 1 }}>
         <NavigationContainer>
           <CurvedBottomBar.Navigator
@@ -94,6 +97,7 @@ import COLORS from '../assets/fonts/colors';
           </CurvedBottomBar.Navigator>
         </NavigationContainer>
       </View>
+      </SafeAreaProvider>
     );
   };
 
