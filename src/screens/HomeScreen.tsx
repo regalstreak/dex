@@ -1,15 +1,48 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import COLORS from '../assets/fonts/colors';
 
 const HomeScreen = () => {
 	return (
-		<SafeAreaView>
-			<View style={{ backgroundColor: '#BFEFFF', flex: 1 }}>
-				<Text>Home Screen</Text>
+			<View style={homeScreenStyles.container}>
+				<Text style={homeScreenStyles.subTitle}>Welcome to,</Text>
+				<Text style={homeScreenStyles.headingText}>The Vatican Museum</Text>
+				<Image
+        			source={{ uri : 'https://www.travelingturks.com/wp-content/uploads/vatican-museum.jpg' }}
+					style={{width: 'auto', height: 150, marginTop: 12, marginLeft: -12, marginRight: -12, marginBottom: 32}}
+      				/>
+
+			<Text style={homeScreenStyles.headingText}>Explorables</Text>
+			<Text style={homeScreenStyles.subTitle}>Find these artifacts near you to experience dex AR</Text>
+
+				
 			</View>
-		</SafeAreaView>
 	);
 };
 
 export default HomeScreen;
+
+
+const homeScreenStyles = StyleSheet.create({
+	container: {
+		flex: 1,
+		padding: 12,
+		justifyContent: 'center',
+		backgroundColor: '#F5FCFF',
+	},
+
+	headingText: {
+		fontSize: 28,
+		fontWeight: 'bold',
+		color: COLORS.GRAY.G1,
+
+		// textAlign: 'center',
+	}
+,
+	subTitle: {
+		fontSize: 12,
+		color: COLORS.GRAY.G3
+	}
+});
+
+
