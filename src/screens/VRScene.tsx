@@ -32,6 +32,7 @@ const HelloWorldSceneAR = () => {
 				<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
 			 
 			</ViroARImageMarker>
+			
 		</ViroARScene>
 	);
 };
@@ -43,7 +44,8 @@ ViroARTrackingTargets.createTargets({
 		orientation: 'Up',
 		physicalWidth: 0.4, // real world width in meters
 		type: 'Image',
-	},
+	}, 
+	
 });
 
 export default () => {
