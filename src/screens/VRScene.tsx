@@ -25,27 +25,39 @@ const VRSceneScreen = () => {
 	}, []);
 	return (
 		// In your render function, add an image marker that references the target
-		<ViroARScene>
-			<ViroARImageMarker target={'targetOne'}>
-				<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
-				<Viro3DObject
-					source={require('../assets/models/david/moses/model.obj')}
-					// resources={[
-					// 	// require('../assets/models/david/moses/model.mtl'),
-					// 	// require('../assets/models/david/moses/model.jpg'),
-					// 	// require('res/texture1.html'),
-					// 	// require('res/texture2.html'),
-					// 	// require('res/texture3.html'),
-					// ]}
-					// highAccuracyEvents={true}
-					position={[10, 0, 0]}
-					scale={[0.5, 0.5, 0.5]}
-					type='OBJ'
-					dragType='FixedToWorld'
-					// transformBehaviors={['billboard']}
-				/>
-			</ViroARImageMarker>
-		</ViroARScene>
+		<>
+			<ViroARScene>
+				<ViroARImageMarker target={'targetOne'}>
+					<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
+					<Viro3DObject
+						source={require('../assets/models/david/moses/model.obj')}
+						// resources={[
+						// 	// require('../assets/models/david/moses/model.mtl'),
+						// 	// require('../assets/models/david/moses/model.jpg'),
+						// 	// require('res/texture1.html'),
+						// 	// require('res/texture2.html'),
+						// 	// require('res/texture3.html'),
+						// ]}
+						// highAccuracyEvents={true}
+						position={[10, 0, 0]}
+						scale={[0.5, 0.5, 0.5]}
+						type='OBJ'
+						dragType='FixedToWorld'
+						// transformBehaviors={['billboard']}
+					/>
+				</ViroARImageMarker>
+			</ViroARScene>
+			<BottomSheet
+				ref={bottomSheetRef}
+				index={1}
+				snapPoints={snapPoints}
+				onChange={handleSheetChanges}
+			>
+				<View style={styles.contentContainer}>
+					<Text>Awesome 🎉</Text>
+				</View>
+			</BottomSheet>
+		</>
 	);
 };
 
