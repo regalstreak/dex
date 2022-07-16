@@ -39,9 +39,9 @@ const HelloWorldSceneAR = () => {
 // Outside of the render function, register the target
 ViroARTrackingTargets.createTargets({
 	targetOne: {
-		source: require('./res/test.png'),
+		source: require('./res/irl.jpg'),
 		orientation: 'Up',
-		physicalWidth: 0.2, // real world width in meters
+		physicalWidth: 0.4, // real world width in meters
 		type: 'Image',
 	},
 });
