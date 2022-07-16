@@ -6,6 +6,10 @@ import {
 	ViroTrackingStateConstants,
 	ViroARSceneNavigator,
 	ViroARPlane,
+	ViroSphere,
+	ViroARImageMarker,
+	ViroBox,
+	ViroARTrackingTargets,
 } from '@viro-community/react-viro';
 
 const HelloWorldSceneAR = () => {
@@ -21,16 +25,26 @@ const HelloWorldSceneAR = () => {
 	}
 
 	return (
-		<ViroARScene onTrackingUpdated={onInitialized}>
-			<ViroText
-				text={text}
-				scale={[0.5, 0.5, 0.5]}
-				position={[0, 0, -1]}
-				style={styles.helloWorldTextStyle}
-			/>
+	
+		// In your render function, add an image marker that references the target
+		<ViroARScene>
+			<ViroARImageMarker target={'targetOne'}>
+				<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
+			 
+			</ViroARImageMarker>
 		</ViroARScene>
 	);
 };
+
+// Outside of the render function, register the target
+ViroARTrackingTargets.createTargets({
+	targetOne: {
+		source: require('./res/test.png'),
+		orientation: 'Up',
+		physicalWidth: 0.2, // real world width in meters
+		type: 'Image',
+	},
+});
 
 export default () => {
 	return (
