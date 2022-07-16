@@ -53,6 +53,9 @@ import COLORS from '../assets/fonts/colors';
       <View style={{ flex: 1 }}>
         <NavigationContainer>
           <CurvedBottomBar.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}
             style={styles.bottomBar}
             strokeWidth={0.5}
             height={55}
