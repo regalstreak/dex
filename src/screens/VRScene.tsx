@@ -1,72 +1,42 @@
-import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import {
-	ViroARScene,
-	ViroText,
-	ViroTrackingStateConstants,
-	ViroARSceneNavigator,
-	ViroARPlane,
-	ViroSphere,
-	ViroARImageMarker,
-	ViroBox,
-	ViroARTrackingTargets,
-} from '@viro-community/react-viro';
+import BottomSheet from '@gorhom/bottom-sheet';
+import React, { useCallback, useMemo, useRef } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import VRScene from '../components/VRScene';
 
-const HelloWorldSceneAR = () => {
-	const [text, setText] = useState('Initializing AR...');
+const VRSceneScreen = () => {
+	const bottomSheetRef = useRef<BottomSheet>(null);
 
-	function onInitialized(state: ViroTrackingStateConstants, reason: any) {
-		console.log('guncelleme', state, reason);
-		if (state === ViroTrackingStateConstants.TRACKING_NORMAL) {
-			setText('Hello World!');
-		} else if (state === ViroTrackingStateConstants.TRACKING_LIMITED) {
-			// Handle loss of tracking
-		}
-	}
+	// variables
+	const snapPoints = useMemo(() => ['25%', '50%'], []);
 
+	const handleSheetChanges = useCallback((index: number) => {
+		console.log('handleSheetChanges', index);
+	}, []);
 	return (
-	
-		// In your render function, add an image marker that references the target
-		<ViroARScene >
-			<ViroARImageMarker target={'targetOne'}>
-				<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
-			 
-			</ViroARImageMarker>
-			
-		</ViroARScene>
+		<View style={styles.container}>
+			<View style={styles.arview}>
+				<VRScene />
+			</View>
+		</View>
 	);
 };
 
-// Outside of the render function, register the target
-ViroARTrackingTargets.createTargets({
-	targetOne: {
-		source: require('../assets/res/irl.jpg'),
-		orientation: 'Up',
-		physicalWidth: 0.4, // real world width in meters
-		type: 'Image',
-	}, 
-	
-});
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		// padding: 24,
+		backgroundColor: 'gray',
+	},
+	contentContainer: {
+		zIndex: 9999,
+		flex: 1,
+		alignItems: 'center',
+	},
 
-export default () => {
-	return (
-		<ViroARSceneNavigator
-			autofocus={true}
-			initialScene={{
-				scene: HelloWorldSceneAR,
-			}}
-			style={styles.f1}
-		/>
-	);
-};
-
-var styles = StyleSheet.create({
-	f1: { flex: 1 },
-	helloWorldTextStyle: {
-		fontFamily: 'Arial',
-		fontSize: 30,
-		color: '#ffffff',
-		textAlignVertical: 'center',
-		textAlign: 'center',
+	arview: {
+		flex: 1,
+		zIndex: 1,
 	},
 });
+
+export default VRSceneScreen;

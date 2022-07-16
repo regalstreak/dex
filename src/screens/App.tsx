@@ -14,6 +14,8 @@ import VRScene from './VRScene';
 import ProfileScreen from './Profile';
 import COLORS from '../assets/fonts/colors';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import VRSceneScreen from './VRScene';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const App = () => {
 	const _renderIcon = (routeName: string, selectedTab: string) => {
@@ -32,7 +34,7 @@ const App = () => {
 	};
 	const renderTabBar = ({ routeName, selectedTab, navigate }: any) => {
 		if (routeName === 'VRScene') {
-			return null;
+			return <View></View>;
 		}
 		return (
 			<TouchableOpacity
@@ -49,59 +51,62 @@ const App = () => {
 	};
 
 	return (
-		<SafeAreaProvider>
-			<View style={{ flex: 1 }}>
-				<NavigationContainer>
-					<CurvedBottomBar.Navigator
-						screenOptions={{
-							headerShown: false,
-						}}
-						style={styles.bottomBar}
-						height={50}
-						circleWidth={50}
-						bgColor={COLORS.GRAY.G1}
-						initialRouteName='Home'
-						borderTopLeftRight
-						renderCircle={({ selectedTab, navigate }) => (
-							<Animated.View style={styles.btnCircle}>
-								<TouchableOpacity
-									style={{
-										flex: 1,
-										justifyContent: 'center',
-									}}
-									onPress={() => navigate('VRScene')}
-								>
-									<Ionicons
-										name={'layers-outline'}
-										color={
-											COLORS.BRAND_COLORS.HEADOUT_CANDY
-										}
-										size={25}
-									/>
-								</TouchableOpacity>
-							</Animated.View>
-						)}
-						tabBar={renderTabBar}
-					>
-						<CurvedBottomBar.Screen
-							name='Home'
-							position='LEFT'
-							component={HomeScreen}
-						/>
-						<CurvedBottomBar.Screen
-							name='VRScene'
-							position='CENTER'
-							component={VRScene}
-						/>
-						<CurvedBottomBar.Screen
-							name='Profile'
-							component={ProfileScreen}
-							position='RIGHT'
-						/>
-					</CurvedBottomBar.Navigator>
-				</NavigationContainer>
-			</View>
-		</SafeAreaProvider>
+		<GestureHandlerRootView style={{ flex: 1 }}>
+			<SafeAreaProvider>
+				<View style={{ flex: 1 }}>
+					<NavigationContainer>
+						<CurvedBottomBar.Navigator
+							screenOptions={{
+								headerShown: false,
+							}}
+							style={styles.bottomBar}
+							height={50}
+							circleWidth={50}
+							bgColor={COLORS.GRAY.G1}
+							initialRouteName='Home'
+							borderTopLeftRight
+							renderCircle={({ selectedTab, navigate }) => (
+								<Animated.View style={styles.btnCircle}>
+									<TouchableOpacity
+										style={{
+											flex: 1,
+											justifyContent: 'center',
+										}}
+										onPress={() => navigate('VRScene')}
+									>
+										<Ionicons
+											name={'layers-outline'}
+											color={
+												COLORS.BRAND_COLORS
+													.HEADOUT_CANDY
+											}
+											size={25}
+										/>
+									</TouchableOpacity>
+								</Animated.View>
+							)}
+							tabBar={renderTabBar}
+						>
+							<CurvedBottomBar.Screen
+								name='Home'
+								position='LEFT'
+								component={HomeScreen}
+							/>
+							<CurvedBottomBar.Screen
+								name='VRScene'
+								position='CENTER'
+								component={VRSceneScreen}
+							/>
+							<CurvedBottomBar.Screen
+								name='Profile'
+								component={ProfileScreen}
+								position='RIGHT'
+							/>
+						</CurvedBottomBar.Navigator>
+					</NavigationContainer>
+				</View>
+			</SafeAreaProvider>
+		</GestureHandlerRootView>
 	);
 };
 
