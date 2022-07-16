@@ -9,17 +9,21 @@ import React from 'react';
   import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
   import Ionicons from 'react-native-vector-icons/Ionicons';
   import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './HomeScreen';
+import VRScene from './VRScene';
+import ProfileScreen from './Profile';
+import COLORS from '../assets/fonts/colors';
 
-  export const tabBar = () => {
+  const App = () => {
     const _renderIcon = (routeName: string, selectedTab: string) => {
       let icon = '';
 
       switch (routeName) {
-        case 'title1':
-          icon = 'ios-home-outline';
+        case 'Home':
+          icon = 'home-outline';
           break;
-        case 'title2':
-          icon = 'settings-outline';
+        case 'Profile':
+          icon = 'person-outline';
           break;
       }
 
@@ -54,7 +58,7 @@ import React from 'react';
             height={55}
             circleWidth={55}
             bgColor="white"
-            initialRouteName="title1"
+            initialRouteName="Home"
             borderTopLeftRight
             renderCircle={({ selectedTab, navigate }) => (
               <Animated.View style={styles.btnCircle}>
@@ -63,31 +67,34 @@ import React from 'react';
                     flex: 1,
                     justifyContent: 'center',
                   }}
-                  onPress={() => Alert.alert('Click Action')}>
-                  <Ionicons name={'apps-sharp'} color="gray" size={25} />
+                  onPress={() => navigate('VRScene')}>
+                  <Ionicons name={'layers-outline'} color={COLORS.PURPS.LIGHT_TONE_1} size={25} />
                 </TouchableOpacity>
               </Animated.View>
             )}
             tabBar={renderTabBar}>
             <CurvedBottomBar.Screen
-              name="title1"
-              position="left"
-              component={() => (
-                <View style={{ backgroundColor: '#BFEFFF', flex: 1 }} />
-              )}
+              name="Home"
+              position="LEFT"
+              component={HomeScreen}
             />
             <CurvedBottomBar.Screen
-              name="title2"
-              component={() => (
-                <View style={{ backgroundColor: '#FFEBCD', flex: 1 }} />
-              )}
-              position="right"
+              name="VRScene"
+              position="CENTER"
+              component={VRScene}
+            />
+            <CurvedBottomBar.Screen
+              name="Profile"
+              component={ProfileScreen}
+              position="RIGHT"
             />
           </CurvedBottomBar.Navigator>
         </NavigationContainer>
       </View>
     );
   };
+
+  export default App
 
   export const styles = StyleSheet.create({
     container: {
