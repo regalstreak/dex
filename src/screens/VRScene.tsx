@@ -27,7 +27,7 @@ const HelloWorldSceneAR = () => {
 	return (
 	
 		// In your render function, add an image marker that references the target
-		<ViroARScene>
+		<ViroARScene >
 			<ViroARImageMarker target={'targetOne'}>
 				<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
 			 

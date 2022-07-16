@@ -22,10 +22,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
       switch (routeName) {
         case 'Home':
-          icon = 'home-outline';
+          icon = selectedTab === "Home" ? 'home': 'home-outline';
           break;
         case 'Profile':
-          icon = 'person-outline';
+          icon = selectedTab === 'Profile' ? 'person': 'person-outline';
           break;
       }
 
@@ -33,7 +33,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
         <Ionicons
           name={icon}
           size={25}
-          color={routeName === selectedTab ? 'black' : 'gray'}
+          color={ COLORS.GRAY.G7}
         />
       );
     };
@@ -60,10 +60,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
             headerShown: false,
           }}
             style={styles.bottomBar}
-            strokeWidth={0.5}
-            height={55}
-            circleWidth={55}
-            bgColor="white"
+            // strokeWidth={0.5}
+            height={50}
+            circleWidth={50}
+            bgColor={COLORS.GRAY.G1}
             initialRouteName="Home"
             borderTopLeftRight
             renderCircle={({ selectedTab, navigate }) => (
@@ -74,7 +74,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
                     justifyContent: 'center',
                   }}
                   onPress={() => navigate('VRScene')}>
-                  <Ionicons name={'layers-outline'} color={COLORS.PURPS.LIGHT_TONE_1} size={25} />
+                  <Ionicons name={'layers-outline'} color={COLORS.BRAND_COLORS.HEADOUT_CANDY} size={25} />
                 </TouchableOpacity>
               </Animated.View>
             )}
@@ -118,7 +118,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
       borderRadius: 35,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'white',
+      backgroundColor: COLORS.GRAY.G1,
       padding: 10,
       shadowColor: '#000',
       shadowOffset: {
@@ -133,7 +133,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
     imgCircle: {
       width: 30,
       height: 30,
-      tintColor: 'gray',
     },
     img: {
       width: 30,

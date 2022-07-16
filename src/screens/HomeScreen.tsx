@@ -28,20 +28,20 @@ const homeScreenStyles = StyleSheet.create({
 		flex: 1,
 		padding: 12,
 		justifyContent: 'center',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,
 	},
 
 	headingText: {
 		fontSize: 28,
 		fontWeight: 'bold',
-		color: COLORS.GRAY.G1,
+		color: 'white',
 
 		// textAlign: 'center',
 	}
 ,
 	subTitle: {
 		fontSize: 12,
-		color: COLORS.GRAY.G3
+		color: COLORS.GRAY.G7
 	}
 });
 
