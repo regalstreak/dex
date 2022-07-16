@@ -10,11 +10,11 @@ import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
-import VRScene from './VRScene';
+import VRScene from './ARScreen';
 import ProfileScreen from './Profile';
 import COLORS from '../assets/fonts/colors';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import VRSceneScreen from './VRScene';
+import VRSceneScreen from './ARScreen';
 
 const App = () => {
 	const _renderIcon = (routeName: string, selectedTab: string) => {
