@@ -33,67 +33,63 @@ const HelloWorldSceneAR = () => {
 		// In your render function, add an image marker that references the target
 		<ViroARScene>
 			<ViroARImageMarker target={'targetOne'}>
-				{currentModel === 1 ? (
-					<Viro3DObject
-						source={require('../assets/models/david/moses/model.obj')}
-						highAccuracyEvents={false}
-						position={[0, 0, 0]}
-						scale={[0, 0, 0]}
-						rotation={[-90, 0, 0]}
-						type='OBJ'
-						animation={{
-							name: currentAnim,
-							run: currentModel === 1,
-							delay: delay,
-							interruptible: true,
-							loop: currentAnim === 'rotate',
-							onFinish: () => {
-								if (currentAnim === 'easeIn') {
-									setCurrentAnim('rotate');
-									setDelay(0);
-									setTimeout(() => {
-										setCurrentAnim('easeOut');
-									}, 5000);
-								}
-								if (currentAnim === 'easeOut') {
-									setCurrentAnim('easeIn');
-									setCurrentModel(2);
-								}
-							},
-						}}
-					/>
-				) : null}
+				<Viro3DObject
+					source={require('../assets/models/david/moses/model.obj')}
+					highAccuracyEvents={false}
+					position={[0, 0, 0]}
+					scale={[0, 0, 0]}
+					rotation={[-90, 0, 0]}
+					type='OBJ'
+					animation={{
+						name: currentAnim,
+						run: currentModel === 1,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: () => {
+							if (currentAnim === 'easeIn') {
+								setCurrentAnim('rotate');
+								setDelay(0);
+								setTimeout(() => {
+									setCurrentAnim('easeOut');
+								}, 5000);
+							}
+							if (currentAnim === 'easeOut') {
+								setCurrentAnim('easeIn');
+								setCurrentModel(2);
+							}
+						},
+					}}
+				/>
 
-				{currentModel === 2 ? (
-					<Viro3DObject
-						source={require('../assets/models/david/moses/model.obj')}
-						resources={[
-							require('../assets/models/david/moses/model.mtl'),
-							require('../assets/models/david/moses/model.jpg'),
-						]}
-						highAccuracyEvents={false}
-						position={[0, 0, 0]}
-						scale={[0, 0, 0]}
-						rotation={[-90, 0, 0]}
-						type='OBJ'
-						animation={{
-							name: currentAnim,
-							run: currentModel === 2,
-							delay: delay,
-							interruptible: true,
-							loop: currentAnim === 'rotate',
-							onFinish: () => {
-								if (currentAnim === 'easeIn') {
-									setCurrentAnim('rotate');
-									setDelay(0);
-									setTimeout(() => {
-										setCurrentAnim('easeOut');
-									}, 5000);
-								}
-							},
-						}}
-					/>
-				) : null}
+				<Viro3DObject
+					source={require('../assets/models/david/moses/model.obj')}
+					resources={[
+						require('../assets/models/david/moses/model.mtl'),
+						require('../assets/models/david/moses/model.jpg'),
+					]}
+					highAccuracyEvents={false}
+					position={[0, 0, 0]}
+					scale={[0, 0, 0]}
+					rotation={[-90, 0, 0]}
+					type='OBJ'
+					animation={{
+						name: currentAnim,
+						run: currentModel === 2,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: () => {
+							if (currentAnim === 'easeIn') {
+								setCurrentAnim('rotate');
+								setDelay(0);
+								setTimeout(() => {
+									setCurrentAnim('easeOut');
+								}, 5000);
+							}
+						},
+					}}
+				/>
 			</ViroARImageMarker>
 		</ViroARScene>
 	);
