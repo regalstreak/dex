@@ -62,7 +62,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 			>
 				<ViroAmbientLight color='#FFFFFF' />
 
-				<Viro3DObject
+				{/* <Viro3DObject
 					source={require('../assets/models/david/pieta/Pieta_C.obj')}
 					resources={[
 						require('../assets/models/david/pieta/Pieta_C.mtl'),
@@ -84,7 +84,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 					// 	loop: currentAnim === 'rotate',
 					// 	onFinish: onFinishCurrentAnim,
 					// }}
-				/>
+				/> */}
 				{/* <Viro3DObject
 					source={require('../assets/models/david/bacchus/Bacchus_C.obj')}
 					resources={[
@@ -106,7 +106,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 						onFinish: onFinishCurrentAnim,
 					}}
 				/> */}
-				{/* <Viro3DObject
+				<Viro3DObject
 					onLoadEnd={onFirstObjectLoad}
 					source={require('../assets/models/david/moses/model.obj')}
 					resources={[
@@ -127,7 +127,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 						loop: currentAnim === 'rotate',
 						onFinish: onFinishCurrentAnim,
 					}}
-				/> */}
+				/>
 			</ViroARImageMarker>
 		</ViroARScene>
 	);
