@@ -12,6 +12,8 @@ import {
 	ViroARTrackingTargets,
 	Viro3DObject,
 	ViroAnimations,
+	ViroAmbientLight,
+	ViroMaterials,
 } from '@viro-community/react-viro';
 
 const EASE_IN_DURATION = 3000;
@@ -44,6 +46,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 		}
 		if (currentAnim === 'easeOut') {
 			setCurrentAnim('easeIn');
+			console.log('Ending', currentModel);
 			setCurrentModel(currentModel + 1);
 		}
 	};
@@ -57,38 +60,42 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 					onFirstObjectLoad();
 				}}
 			>
+				<ViroAmbientLight color='#FFFFFF' />
+
 				<Viro3DObject
-					source={require('../assets/models/david/moses/model.obj')}
+					source={require('../assets/models/david/pieta/Pieta_C.obj')}
 					resources={[
-						require('../assets/models/david/moses/model.mtl'),
-						require('../assets/models/david/moses/model.jpg'),
+						require('../assets/models/david/pieta/Pieta_C.mtl'),
+						require('../assets/models/david/pieta/Pieta_C_Pieta_O_Material_u1_v1.png'),
+						require('../assets/models/david/pieta/internal_ground_ao_texture.jpeg'),
 					]}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
-					scale={[0, 0, 0]}
+					scale={[50, 50, 50]}
 					rotation={[-90, 0, 0]}
 					type='OBJ'
-					visible={currentModel === 1}
-					animation={{
-						name: currentAnim,
-						run: currentModel === 1,
-						delay: delay,
-						interruptible: true,
-						loop: currentAnim === 'rotate',
-						onFinish: onFinishCurrentAnim,
-					}}
+					visible={true}
+					// visible={currentModel === 1}
+					// animation={{
+					// 	name: currentAnim,
+					// 	run: currentModel === 1,
+					// 	delay: delay,
+					// 	interruptible: true,
+					// 	loop: currentAnim === 'rotate',
+					// 	onFinish: onFinishCurrentAnim,
+					// }}
 				/>
-				<Viro3DObject
-					source={require('../assets/models/david/young/scene.gltf')}
+				{/* <Viro3DObject
+					source={require('../assets/models/david/bacchus/Bacchus_C.obj')}
 					resources={[
-						require('../assets/models/david/young/scene.bin'),
-						require('../assets/models/david/young/material_0_baseColor.jpeg'),
+						require('../assets/models/david/bacchus/Bacchus_C.mtl'),
+						require('../assets/models/david/bacchus/Bacchus_C_Bacchus_O_Material_u1_v1.png'),
 					]}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
-					scale={[0, 0, 0]}
+					scale={[1, 1, 1]}
 					rotation={[-90, 0, 0]}
-					type='GLTF'
+					type='OBJ'
 					visible={currentModel === 2}
 					animation={{
 						name: currentAnim,
@@ -98,12 +105,13 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 						loop: currentAnim === 'rotate',
 						onFinish: onFinishCurrentAnim,
 					}}
-				/>
-				<Viro3DObject
-					source={require('../assets/models/david/burnaroti/sculpt.obj')}
+				/> */}
+				{/* <Viro3DObject
+					onLoadEnd={onFirstObjectLoad}
+					source={require('../assets/models/david/moses/model.obj')}
 					resources={[
-						require('../assets/models/david/burnaroti/Autodesk123DSculpt.mtl'),
-						require('../assets/models/david/burnaroti/tex_0.jpg'),
+						require('../assets/models/david/moses/model.mtl'),
+						require('../assets/models/david/moses/model.jpg'),
 					]}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
@@ -119,7 +127,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 						loop: currentAnim === 'rotate',
 						onFinish: onFinishCurrentAnim,
 					}}
-				/>
+				/> */}
 			</ViroARImageMarker>
 		</ViroARScene>
 	);
