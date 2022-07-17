@@ -19,7 +19,6 @@ const EASE_OUT_DURATION = 2500;
 const ROTATE_DURATION = 5000;
 
 const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
-
 	const [text, setText] = useState('Initializing AR...');
 	const [currentAnim, setCurrentAnim] = useState('easeIn');
 	const [currentModel, setCurrentModel] = useState(0);
@@ -53,10 +52,12 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 		<ViroARScene>
 			<ViroARImageMarker
 				target={'targetOne'}
-				onAnchorFound={() => setCurrentModel(2)}
+				onAnchorFound={() => {
+					setCurrentModel(2);
+					onFirstObjectLoad();
+				}}
 			>
 				<Viro3DObject
-					onLoadEnd={onFirstObjectLoad}
 					source={require('../assets/models/david/moses/model.obj')}
 					resources={[
 						require('../assets/models/david/moses/model.mtl'),
@@ -127,7 +128,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 // Outside of the render function, register the target
 ViroARTrackingTargets.createTargets({
 	targetOne: {
-		source: require('../assets/res/irl.jpg'),
+		source: require('../assets/models/david/marker.png'),
 		orientation: 'Up',
 		physicalWidth: 0.4, // real world width in meters
 		type: 'Image',
@@ -158,7 +159,7 @@ ViroAnimations.registerAnimations({
 			scaleX: 0.02,
 			scaleY: 0.02,
 			scaleZ: 0.02,
-			opacity: 1
+			opacity: 1,
 		},
 		easing: 'EaseInEaseOut',
 		duration: EASE_IN_DURATION,
