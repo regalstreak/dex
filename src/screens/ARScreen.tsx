@@ -16,8 +16,31 @@ import {
 	SensorTypes,
 	setUpdateIntervalForType,
 } from 'react-native-sensors';
+import { ExploreScreen } from './ExploreScreen';
+import {
+	DarkTheme,
+	NavigationContainer,
+	Theme,
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { DetailsScreen } from './DetailsScreen';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 500);
+
+export type MainStack = {
+	ExploreScreen: {};
+	DetailsScreen: {};
+};
+
+const Stack = createNativeStackNavigator<MainStack>();
+
+const MyTheme: Theme = {
+	...DarkTheme,
+	colors: {
+		...DarkTheme.colors,
+		background: COLORS.BRAND_COLORS.SLATE_BLACK,
+	},
+};
 
 const VRSceneScreen = () => {
 	const bottomSheetRef = useRef<BottomSheet>(null);
@@ -62,40 +85,21 @@ const VRSceneScreen = () => {
 				activeOffsetX={[-999, 999]}
 				activeOffsetY={[-20, 20]}
 			>
-				<View style={styles.container}>
-					<Text
-						style={{
-							...styles.headingText,
-							fontSize: 24,
-						}}
-					>
-						Explorables
-					</Text>
-					<Text style={styles.subTitle}>
-						Find these artifacts near you to experience dex AR
-					</Text>
-
-					<ArtifactsCarousel
-						artifactDetails={[
-							{
-								text: 'Roman, 1st century AD Augustus of Prima Porta Museo Chiaramonti',
-								image: 'https://cdn.discordapp.com/attachments/594962648077041693/997986613156122634/480px-Statue-Augustus.jpg',
-							},
-							{
-								text: 'Raphael The Transfiguration Pinacoteca Vaticana ',
-								image: 'https://cdn.discordapp.com/attachments/594962648077041693/997986612732506184/478px-Transfiguration_Raphael.jpg',
-							},
-							{
-								text: 'Agesander, Athenodorus and Polydorus Laocoön and His Sons Museo Pio-Clementino',
-								image: 'https://cdn.discordapp.com/attachments/594962648077041693/997986613386821652/677px-Laocoon_Pio-Clementino_Inv1059-1064-1067.jpg',
-							},
-							{
-								text: 'Raphael The School of Athens Raphael Rooms',
-								image: 'https://cdn.discordapp.com/attachments/594962648077041693/997986613680418926/928px-_The_School_of_Athens__by_Raffaello_Sanzio_da_Urbino.jpg',
-							},
-						]}
-					/>
-				</View>
+				<NavigationContainer theme={MyTheme}>
+					<Stack.Navigator>
+						<Stack.Screen
+							name='ExploreScreen'
+							component={ExploreScreen}
+							options={{
+								headerShown: false,
+							}}
+						/>
+						<Stack.Screen
+							name='DetailsScreen'
+							component={DetailsScreen}
+						/>
+					</Stack.Navigator>
+				</NavigationContainer>
 			</BottomSheet>
 		</>
 	);

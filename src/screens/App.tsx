@@ -56,15 +56,16 @@ const App = () => {
 	return (
 		<SafeAreaProvider>
 			<View style={{ flex: 1 }}>
-				<NavigationContainer>
-					<Stack.Navigator
+				{/* <NavigationContainer> */}
+				{/* <Stack.Navigator
 						screenOptions={{
 							headerShown: false,
 						}}
 					>
 						<Stack.Screen name='ARScreen' component={ARScreen} />
-					</Stack.Navigator>
-				</NavigationContainer>
+					</Stack.Navigator> */}
+				{/* </NavigationContainer> */}
+				<ARScreen />
 			</View>
 		</SafeAreaProvider>
 	);
