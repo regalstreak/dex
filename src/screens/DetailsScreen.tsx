@@ -15,9 +15,9 @@ export const DetailsScreen = () => {
 					color: COLORS.BRAND_COLORS.HEADOUT_CANDY,
 					fontSize: 12,
 					letterSpacing: 0.8,
+					marginBottom: 8,
 				}}
 			>
-				{' '}
 				Now Experiencing
 			</Text>
 			<View style={{ flexDirection: 'row' }}>
@@ -41,7 +41,7 @@ export const DetailsScreen = () => {
 					width: 'auto',
 					height: 150,
 					marginTop: 16,
-					marginBottom: 20,
+					marginBottom: 36,
 				}}
 			/>
 
@@ -74,8 +74,8 @@ export const DetailsScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 16,
-		paddingTop: 16,
+		paddingHorizontal: 24,
+		paddingTop: 24,
 		paddingBottom: 12,
 		// justifyContent: 'center',
 		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,
@@ -98,5 +98,6 @@ const styles = StyleSheet.create({
 		fontSize: 12,
 		color: COLORS.GRAY.G6,
 		marginBottom: 8,
+		paddingHorizontal: 4,
 	},
 });

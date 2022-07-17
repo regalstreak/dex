@@ -100,7 +100,11 @@ const VRSceneScreen = () => {
 				activeOffsetX={[-999, 999]}
 				activeOffsetY={[-20, 20]}
 			>
-				<Stack.Navigator>
+				<Stack.Navigator
+					screenOptions={{
+						animation: 'slide_from_right',
+					}}
+				>
 					<Stack.Screen
 						name='ExploreScreen'
 						component={ExploreScreen}

@@ -5,7 +5,7 @@ import COLORS from '../assets/fonts/colors';
 const InfoSection = () => {
 	return (
 		<View style={homeScreenStyles.container}>
-			<Text style={homeScreenStyles.subTitle}>Welcome to,</Text>
+			<Text style={homeScreenStyles.subTitle}>Welcome to</Text>
 			<Text style={homeScreenStyles.headingText}>The Vatican Museum</Text>
 			<Image
 				source={{
@@ -27,7 +27,7 @@ export default InfoSection;
 
 const homeScreenStyles = StyleSheet.create({
 	container: {
-		flex: 1,
+		// flex: 1,
 		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,
 	},
 
