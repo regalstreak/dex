@@ -14,11 +14,17 @@ import {
 	ViroAnimations,
 } from '@viro-community/react-viro';
 
+const EASE_IN_DURATION = 3000;
+const EASE_OUT_DURATION = 2500;
+const ROTATE_DURATION = 5000;
+
 const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
+
 	const [text, setText] = useState('Initializing AR...');
 	const [currentAnim, setCurrentAnim] = useState('easeIn');
-	const [currentModel, setCurrentModel] = useState(1);
+	const [currentModel, setCurrentModel] = useState(0);
 	const [delay, setDelay] = useState(1000);
+	const [animationPlaying, setAnimationPlaying] = useState(true);
 
 	function onInitialized(state: ViroTrackingStateConstants, reason: any) {
 		console.log('guncelleme', state, reason);
@@ -29,41 +35,28 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 		}
 	}
 
+	const onFinishCurrentAnim = () => {
+		if (currentAnim === 'easeIn') {
+			setCurrentAnim('rotate');
+			setDelay(0);
+			setTimeout(() => {
+				setCurrentAnim('easeOut');
+			}, 8000);
+		}
+		if (currentAnim === 'easeOut') {
+			setCurrentAnim('easeIn');
+			setCurrentModel(currentModel + 1);
+		}
+	};
 	return (
 		// In your render function, add an image marker that references the target
 		<ViroARScene>
-			<ViroARImageMarker target={'targetOne'}>
+			<ViroARImageMarker
+				target={'targetOne'}
+				onAnchorFound={() => setCurrentModel(2)}
+			>
 				<Viro3DObject
 					onLoadEnd={onFirstObjectLoad}
-					source={require('../assets/models/david/moses/model.obj')}
-					highAccuracyEvents={false}
-					position={[0, 0, 0]}
-					scale={[0, 0, 0]}
-					rotation={[-90, 0, 0]}
-					type='OBJ'
-					animation={{
-						name: currentAnim,
-						run: currentModel === 1,
-						delay: delay,
-						interruptible: true,
-						loop: currentAnim === 'rotate',
-						onFinish: () => {
-							if (currentAnim === 'easeIn') {
-								setCurrentAnim('rotate');
-								setDelay(0);
-								setTimeout(() => {
-									setCurrentAnim('easeOut');
-								}, 5000);
-							}
-							if (currentAnim === 'easeOut') {
-								setCurrentAnim('easeIn');
-								setCurrentModel(2);
-							}
-						},
-					}}
-				/>
-
-				<Viro3DObject
 					source={require('../assets/models/david/moses/model.obj')}
 					resources={[
 						require('../assets/models/david/moses/model.mtl'),
@@ -74,21 +67,56 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 					scale={[0, 0, 0]}
 					rotation={[-90, 0, 0]}
 					type='OBJ'
+					visible={currentModel === 1}
+					animation={{
+						name: currentAnim,
+						run: currentModel === 1,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: onFinishCurrentAnim,
+					}}
+				/>
+				<Viro3DObject
+					source={require('../assets/models/david/young/scene.gltf')}
+					resources={[
+						require('../assets/models/david/young/scene.bin'),
+						require('../assets/models/david/young/material_0_baseColor.jpeg'),
+					]}
+					highAccuracyEvents={false}
+					position={[0, 0, 0]}
+					scale={[0, 0, 0]}
+					rotation={[-90, 0, 0]}
+					type='GLTF'
+					visible={currentModel === 2}
 					animation={{
 						name: currentAnim,
 						run: currentModel === 2,
 						delay: delay,
 						interruptible: true,
 						loop: currentAnim === 'rotate',
-						onFinish: () => {
-							if (currentAnim === 'easeIn') {
-								setCurrentAnim('rotate');
-								setDelay(0);
-								setTimeout(() => {
-									setCurrentAnim('easeOut');
-								}, 5000);
-							}
-						},
+						onFinish: onFinishCurrentAnim,
+					}}
+				/>
+				<Viro3DObject
+					source={require('../assets/models/david/burnaroti/sculpt.obj')}
+					resources={[
+						require('../assets/models/david/burnaroti/Autodesk123DSculpt.mtl'),
+						require('../assets/models/david/burnaroti/tex_0.jpg'),
+					]}
+					highAccuracyEvents={false}
+					position={[0, 0, 0]}
+					scale={[0, 0, 0]}
+					rotation={[-90, 0, 0]}
+					type='OBJ'
+					visible={currentModel === 3}
+					animation={{
+						name: currentAnim,
+						run: currentModel === 3,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: onFinishCurrentAnim,
 					}}
 				/>
 			</ViroARImageMarker>
@@ -123,16 +151,17 @@ ViroAnimations.registerAnimations({
 		properties: {
 			rotateZ: '+=360',
 		},
-		duration: 5000,
+		duration: ROTATE_DURATION,
 	},
 	easeIn: {
 		properties: {
 			scaleX: 0.02,
 			scaleY: 0.02,
 			scaleZ: 0.02,
+			opacity: 1
 		},
-		easing: 'Bounce',
-		duration: 7000,
+		easing: 'EaseInEaseOut',
+		duration: EASE_IN_DURATION,
 	},
 	easeOut: {
 		properties: {
@@ -141,8 +170,8 @@ ViroAnimations.registerAnimations({
 			scaleZ: 0,
 			opacity: 0,
 		},
-		easing: 'Bounce',
-		duration: 3000,
+		easing: 'EaseInEaseOut',
+		duration: EASE_OUT_DURATION,
 	},
 });
 export default ({ onFirstObjectLoad }) => {

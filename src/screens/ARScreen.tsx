@@ -24,6 +24,8 @@ import {
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DetailsScreen } from './DetailsScreen';
+import AudioPlayer, { useTrackPlayer } from '../components/AudioPlayer';
+import TrackPlayer from 'react-native-track-player';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 500);
 
@@ -41,8 +43,6 @@ const MyTheme: Theme = {
 		background: COLORS.BRAND_COLORS.SLATE_BLACK,
 	},
 };
-import AudioPlayer, { useTrackPlayer } from '../components/AudioPlayer';
-import TrackPlayer from 'react-native-track-player';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 500);
 
