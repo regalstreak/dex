@@ -6,12 +6,14 @@ import ArtifactsCarousel from '../components/ArtifactsCarousel';
 import { MainStack } from './ARScreen';
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import InfoSection from '../components/InfoSection';
 
 type Props = NativeStackScreenProps<MainStack, 'ExploreScreen'>;
 
 export const ExploreScreen = ({ navigation }: Props) => {
 	return (
 		<View style={styles.container}>
+			<InfoSection />
 			<Text
 				style={{
 					...styles.headingText,
@@ -23,13 +25,13 @@ export const ExploreScreen = ({ navigation }: Props) => {
 			<Text style={styles.subTitle}>
 				Find these artifacts near you to experience dex AR
 			</Text>
-			<Button
+			{/* <Button
 				onPress={() => {
 					// @ts-ignore
 					navigation.navigate('DetailsScreen');
 				}}
 				title='navigation'
-			/>
+			/> */}
 
 			<ArtifactsCarousel
 				artifactDetails={[
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingHorizontal: 16,
-		paddingTop: 32,
+		paddingTop: 16,
 		paddingBottom: 12,
 		justifyContent: 'center',
 		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,

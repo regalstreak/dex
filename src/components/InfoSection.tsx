@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import COLORS from '../assets/fonts/colors';
-import ArtifactsCarousel from '../components/ArtifactsCarousel';
 
-const HomeScreen = () => {
+const InfoSection = () => {
 	return (
 		<View style={homeScreenStyles.container}>
 			<Text style={homeScreenStyles.subTitle}>Welcome to,</Text>
@@ -17,22 +16,18 @@ const HomeScreen = () => {
 					width: 'auto',
 					height: 150,
 					marginTop: 16,
-
-					marginBottom: 32,
+					marginBottom: 16,
 				}}
 			/>
 		</View>
 	);
 };
 
-export default HomeScreen;
+export default InfoSection;
 
 const homeScreenStyles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 16,
-		paddingTop: 32,
-		paddingBottom: 12,
 		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,
 	},
 

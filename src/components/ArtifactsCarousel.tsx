@@ -68,7 +68,7 @@ export const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	artifactBoxWrapper: {
-		marginTop: 16,
+		marginTop: 12,
 	},
 	artifactBoxText: {
 		marginTop: 'auto',

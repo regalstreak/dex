@@ -10,22 +10,18 @@ import React, {
 
 import VRScene from '../components/VRScene';
 import COLORS from '../assets/fonts/colors';
-import ArtifactsCarousel from '../components/ArtifactsCarousel';
 import {
 	accelerometer,
 	SensorTypes,
 	setUpdateIntervalForType,
 } from 'react-native-sensors';
 import { ExploreScreen } from './ExploreScreen';
-import {
-	DarkTheme,
-	NavigationContainer,
-	Theme,
-} from '@react-navigation/native';
+import { DarkTheme, Theme, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { DetailsScreen } from './DetailsScreen';
-import AudioPlayer, { useTrackPlayer } from '../components/AudioPlayer';
-import TrackPlayer from 'react-native-track-player';
+
+import { useTrackPlayer } from '../hooks/useTrackPlayer';
+import { AUDIO_URL } from '../constants/audio';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 500);
 
@@ -36,7 +32,7 @@ export type MainStack = {
 
 const Stack = createNativeStackNavigator<MainStack>();
 
-const MyTheme: Theme = {
+export const MyTheme: Theme = {
 	...DarkTheme,
 	colors: {
 		...DarkTheme.colors,
@@ -45,8 +41,6 @@ const MyTheme: Theme = {
 };
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 500);
-
-const audioURL = require('../assets/audio/test.mp3');
 
 const VRSceneScreen = () => {
 	const bottomSheetRef = useRef<BottomSheet>(null);
@@ -66,26 +60,27 @@ const VRSceneScreen = () => {
 		return () => subscription.unsubscribe();
 	}, []);
 
-	const { isReady, isPlaying, play, pause } = useTrackPlayer(
-		audioURL,
-		TrackPlayer,
-	);
+	const { isReady, isPlaying, play, pause } = useTrackPlayer(AUDIO_URL);
 
 	// variables
-	const snapPoints = useMemo(() => ['30%', '85%'], []);
+	const snapPoints = useMemo(() => ['30%', '90%'], []);
 
 	const handleSheetChanges = useCallback((index: number) => {
 		console.log('handleSheetChanges', index);
 	}, []);
+
+	const navigation = useNavigation();
+
+	const onAnchorFound = () => {
+		console.log('-------->> ANCHOR FOUND <---------');
+		play();
+		// @ts-ignore
+		navigation.navigate('DetailsScreen');
+	};
 	return (
 		// In your render function, add an image marker that references the target
 		<>
-			<VRScene
-				onFirstObjectLoad={() => {
-					console.log('on MODEL LOAD 00000');
-					play();
-				}}
-			/>
+			<VRScene onFirstObjectLoad={onAnchorFound} />
 			<BottomSheet
 				ref={bottomSheetRef}
 				index={bottomSheetIndex}
@@ -101,21 +96,22 @@ const VRSceneScreen = () => {
 				activeOffsetX={[-999, 999]}
 				activeOffsetY={[-20, 20]}
 			>
-				<NavigationContainer theme={MyTheme}>
-					<Stack.Navigator>
-						<Stack.Screen
-							name='ExploreScreen'
-							component={ExploreScreen}
-							options={{
-								headerShown: false,
-							}}
-						/>
-						<Stack.Screen
-							name='DetailsScreen'
-							component={DetailsScreen}
-						/>
-					</Stack.Navigator>
-				</NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen
+						name='ExploreScreen'
+						component={ExploreScreen}
+						options={{
+							headerShown: false,
+						}}
+					/>
+					<Stack.Screen
+						options={{
+							title: 'The Vatican Museums',
+						}}
+						name='DetailsScreen'
+						component={DetailsScreen}
+					/>
+				</Stack.Navigator>
 			</BottomSheet>
 		</>
 	);

@@ -9,9 +9,8 @@ import {
 import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from './HomeScreen';
-import VRScene from './ARScreen';
-import ProfileScreen from './Profile';
+import HomeScreen from '../components/InfoSection';
+import VRScene, { MyTheme } from './ARScreen';
 import COLORS from '../assets/fonts/colors';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import VRSceneScreen from './ARScreen';
@@ -56,16 +55,16 @@ const App = () => {
 	return (
 		<SafeAreaProvider>
 			<View style={{ flex: 1 }}>
-				{/* <NavigationContainer> */}
-				{/* <Stack.Navigator
+				<NavigationContainer theme={MyTheme}>
+					{/* <Stack.Navigator
 						screenOptions={{
 							headerShown: false,
 						}}
 					>
 						<Stack.Screen name='ARScreen' component={ARScreen} />
 					</Stack.Navigator> */}
-				{/* </NavigationContainer> */}
-				<ARScreen />
+					<ARScreen />
+				</NavigationContainer>
 			</View>
 		</SafeAreaProvider>
 	);
