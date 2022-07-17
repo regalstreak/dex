@@ -11,6 +11,7 @@ import {
 	BottomSheetFlatList,
 	BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
 
 interface ArtifactsCarouselProps {
 	artifactDetails: {
@@ -20,6 +21,7 @@ interface ArtifactsCarouselProps {
 }
 
 const ArtifactsCarousel = ({ artifactDetails }: ArtifactsCarouselProps) => {
+	const navigation = useNavigation();
 	return (
 		<BottomSheetFlatList
 			horizontal={true}
@@ -27,7 +29,12 @@ const ArtifactsCarousel = ({ artifactDetails }: ArtifactsCarouselProps) => {
 			data={artifactDetails}
 			renderItem={({ item }) => {
 				return (
-					<TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => {
+							// @ts-ignore
+							navigation.navigate('DetailsScreen');
+						}}
+					>
 						<ImageBackground
 							source={{
 								uri: item.image,

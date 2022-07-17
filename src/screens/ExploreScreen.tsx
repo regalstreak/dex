@@ -18,6 +18,7 @@ export const ExploreScreen = ({ navigation }: Props) => {
 				style={{
 					...styles.headingText,
 					fontSize: 24,
+					marginTop: 24,
 				}}
 			>
 				Explore
@@ -53,8 +54,8 @@ export const ExploreScreen = ({ navigation }: Props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 16,
-		paddingTop: 16,
+		paddingHorizontal: 24,
+		paddingTop: 24,
 		paddingBottom: 12,
 		justifyContent: 'center',
 		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,

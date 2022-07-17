@@ -100,20 +100,24 @@ const VRSceneScreen = () => {
 				activeOffsetX={[-999, 999]}
 				activeOffsetY={[-20, 20]}
 			>
-				<Stack.Navigator>
-					<Stack.Screen
-						options={{
-							title: 'The Vatican Museums',
-						}}
-						name='DetailsScreen'
-						component={DetailsScreen}
-					/>
+				<Stack.Navigator
+					screenOptions={{
+						animation: 'slide_from_right',
+					}}
+				>
 					<Stack.Screen
 						name='ExploreScreen'
 						component={ExploreScreen}
 						options={{
 							headerShown: false,
 						}}
+					/>
+					<Stack.Screen
+						options={{
+							title: 'The Vatican Museums',
+						}}
+						name='DetailsScreen'
+						component={DetailsScreen}
 					/>
 				</Stack.Navigator>
 			</BottomSheet>
