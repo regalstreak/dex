@@ -10,10 +10,14 @@ import {
 	ViroARImageMarker,
 	ViroBox,
 	ViroARTrackingTargets,
+	Viro3DObject,
+	ViroAnimations,
 } from '@viro-community/react-viro';
 
 const HelloWorldSceneAR = () => {
 	const [text, setText] = useState('Initializing AR...');
+	const [currentAnim, setCurrentAnim] = useState('easeIn');
+	const [delay, setDelay] = useState(1000);
 
 	function onInitialized(state: ViroTrackingStateConstants, reason: any) {
 		console.log('guncelleme', state, reason);
@@ -28,8 +32,34 @@ const HelloWorldSceneAR = () => {
 		// In your render function, add an image marker that references the target
 		<ViroARScene>
 			<ViroARImageMarker target={'targetOne'}>
-				<ViroBox position={[0, -0.25, 0]} scale={[0.5, 0.5, 0.5]} />
-                <ViroText text={text} scale={[0.5, 0.5, 0.5]} position={[0, 0, 0]} rotation={[0, 0, 1]}/>
+				<Viro3DObject
+					source={require('../assets/models/david/moses/model.obj')}
+					// resources={[
+					// 	require('./res/spaceship.mtl'),
+					// 	require('res/texture1.html'),
+					// 	require('res/texture2.html'),
+					// 	require('res/texture3.html')
+					// ]}
+					highAccuracyEvents={false}
+					position={[0, 0, 0]}
+					scale={[0, 0, 0]}
+					rotation={[-90, 0, 0]}
+					type='OBJ'
+					animation={{
+						name: currentAnim,
+						run: true,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: () => {
+							console.log('finished');
+							if (currentAnim === 'easeIn'){
+								setCurrentAnim('rotate');
+								setDelay(0)
+							}
+						},
+					}}
+				/>
 			</ViroARImageMarker>
 		</ViroARScene>
 	);
@@ -44,7 +74,36 @@ ViroARTrackingTargets.createTargets({
 		type: 'Image',
 	},
 });
-
+ViroAnimations.registerAnimations({
+	moveRight: {
+		properties: {
+			positionX: '+=0.3',
+		},
+		duration: 10000,
+	},
+	moveLeft: {
+		properties: {
+			positionX: '-=0.3',
+			rotateZ: '+=45',
+		},
+		duration: 10000,
+	},
+	rotate: {
+		properties: {
+			rotateZ: '+=360',
+		},
+		duration: 5000,
+	},
+	easeIn: {
+		properties: {
+			scaleX: 0.02,
+			scaleY: 0.02,
+			scaleZ: 0.02,
+		},
+		easing: 'EaseIn',
+		duration: 5000,
+	},
+});
 export default () => {
 	return (
 		<ViroARSceneNavigator
