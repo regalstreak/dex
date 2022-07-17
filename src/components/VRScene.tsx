@@ -14,7 +14,7 @@ import {
 	ViroAnimations,
 } from '@viro-community/react-viro';
 
-const HelloWorldSceneAR = () => {
+const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 	const [text, setText] = useState('Initializing AR...');
 	const [currentAnim, setCurrentAnim] = useState('easeIn');
 	const [currentModel, setCurrentModel] = useState(1);
@@ -34,6 +34,7 @@ const HelloWorldSceneAR = () => {
 		<ViroARScene>
 			<ViroARImageMarker target={'targetOne'}>
 				<Viro3DObject
+					onLoadEnd={onFirstObjectLoad}
 					source={require('../assets/models/david/moses/model.obj')}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
@@ -144,12 +145,14 @@ ViroAnimations.registerAnimations({
 		duration: 3000,
 	},
 });
-export default () => {
+export default ({ onFirstObjectLoad }) => {
 	return (
 		<ViroARSceneNavigator
 			autofocus={true}
 			initialScene={{
-				scene: HelloWorldSceneAR,
+				scene: () => (
+					<HelloWorldSceneAR onFirstObjectLoad={onFirstObjectLoad} />
+				),
 			}}
 			style={styles.f1}
 		/>
