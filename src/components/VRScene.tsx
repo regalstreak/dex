@@ -15,6 +15,8 @@ import {
 	ViroAmbientLight,
 	ViroMaterials,
 } from '@viro-community/react-viro';
+import SubTitle from './SubTitle';
+import TrackPlayer from 'react-native-track-player';
 
 const EASE_IN_DURATION = 3000;
 const EASE_OUT_DURATION = 2500;

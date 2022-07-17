@@ -6683,6 +6683,11 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==
 
+srt-parser-2@^1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/srt-parser-2/-/srt-parser-2-1.1.7.tgz#49789ebd7ffff43935797fe25c421234a2fa9507"
+  integrity sha512-JAZKktYKrQ16HPMQkVKxPvCeAdPPJh/186T/uuyCte3+J6/XthkfaGeNqmZ16DDZi1vU6YIINpVHXG5QnG1Hlg==
+
 stack-utils@^2.0.3:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-2.0.5.tgz#d25265fca995154659dbbfba3b49254778d2fdd5"

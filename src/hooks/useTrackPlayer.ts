@@ -3,6 +3,7 @@ import TrackPlayer, {
 	Event,
 	State,
 	usePlaybackState,
+	useProgress,
 	useTrackPlayerEvents,
 } from 'react-native-track-player';
 
@@ -16,6 +17,8 @@ const setUpTrackPlayer = async (url: string) => {
 export const useTrackPlayer = (url: string) => {
 	const playerState = usePlaybackState();
 
+	const progress = useProgress();
+
 	useEffect(() => {
 		if (!url) {
 			return;
@@ -28,6 +31,7 @@ export const useTrackPlayer = (url: string) => {
 
 	useEffect(() => {
 		return () => {
+			TrackPlayer.pause();
 			TrackPlayer.destroy();
 		};
 	}, []);
@@ -45,5 +49,6 @@ export const useTrackPlayer = (url: string) => {
 		isPlaying,
 		play: TrackPlayer.play,
 		pause: TrackPlayer.pause,
+		progress,
 	};
 };

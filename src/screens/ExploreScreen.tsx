@@ -25,13 +25,6 @@ export const ExploreScreen = ({ navigation }: Props) => {
 			<Text style={styles.subTitle}>
 				Find these artifacts near you to experience dex AR
 			</Text>
-			{/* <Button
-				onPress={() => {
-					// @ts-ignore
-					navigation.navigate('DetailsScreen');
-				}}
-				title='navigation'
-			/> */}
 
 			<ArtifactsCarousel
 				artifactDetails={[

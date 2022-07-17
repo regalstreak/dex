@@ -22,6 +22,7 @@ import { DetailsScreen } from './DetailsScreen';
 
 import { useTrackPlayer } from '../hooks/useTrackPlayer';
 import { AUDIO_URL } from '../constants/audio';
+import SubTitle from '../components/SubTitle';
 
 setUpdateIntervalForType(SensorTypes.accelerometer, 500);
 
@@ -60,7 +61,9 @@ const VRSceneScreen = () => {
 		return () => subscription.unsubscribe();
 	}, []);
 
-	const { isReady, isPlaying, play, pause } = useTrackPlayer(AUDIO_URL);
+	const playerInfo = useTrackPlayer(AUDIO_URL);
+
+	const { isReady, isPlaying, play, pause, progress } = playerInfo;
 
 	// variables
 	const snapPoints = useMemo(() => ['30%', '90%'], []);
@@ -81,6 +84,7 @@ const VRSceneScreen = () => {
 		// In your render function, add an image marker that references the target
 		<>
 			<VRScene onFirstObjectLoad={onAnchorFound} />
+			<SubTitle isPlaying={isPlaying} progress={progress.position} />
 			<BottomSheet
 				ref={bottomSheetRef}
 				index={bottomSheetIndex}
@@ -98,18 +102,18 @@ const VRSceneScreen = () => {
 			>
 				<Stack.Navigator>
 					<Stack.Screen
-						name='ExploreScreen'
-						component={ExploreScreen}
-						options={{
-							headerShown: false,
-						}}
-					/>
-					<Stack.Screen
 						options={{
 							title: 'The Vatican Museums',
 						}}
 						name='DetailsScreen'
 						component={DetailsScreen}
+					/>
+					<Stack.Screen
+						name='ExploreScreen'
+						component={ExploreScreen}
+						options={{
+							headerShown: false,
+						}}
 					/>
 				</Stack.Navigator>
 			</BottomSheet>
