@@ -17,6 +17,7 @@ import {
 const HelloWorldSceneAR = () => {
 	const [text, setText] = useState('Initializing AR...');
 	const [currentAnim, setCurrentAnim] = useState('easeIn');
+	const [currentModel, setCurrentModel] = useState(1);
 	const [delay, setDelay] = useState(1000);
 
 	function onInitialized(state: ViroTrackingStateConstants, reason: any) {
@@ -34,12 +35,6 @@ const HelloWorldSceneAR = () => {
 			<ViroARImageMarker target={'targetOne'}>
 				<Viro3DObject
 					source={require('../assets/models/david/moses/model.obj')}
-					// resources={[
-					// 	require('./res/spaceship.mtl'),
-					// 	require('res/texture1.html'),
-					// 	require('res/texture2.html'),
-					// 	require('res/texture3.html')
-					// ]}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
 					scale={[0, 0, 0]}
@@ -47,15 +42,49 @@ const HelloWorldSceneAR = () => {
 					type='OBJ'
 					animation={{
 						name: currentAnim,
-						run: true,
+						run: currentModel === 1,
 						delay: delay,
 						interruptible: true,
 						loop: currentAnim === 'rotate',
 						onFinish: () => {
-							console.log('finished');
 							if (currentAnim === 'easeIn'){
 								setCurrentAnim('rotate');
 								setDelay(0)
+								setTimeout(() => {
+									setCurrentAnim('easeOut')
+								}, 5000)
+							}
+							if( currentAnim === 'easeOut') {
+								setCurrentAnim('easeIn');
+								setCurrentModel(2)
+							}
+						},
+					}}
+				/>
+				<Viro3DObject
+					source={require('../assets/models/david/moses/model.obj')}
+					resources={[
+						require('../assets/models/david/moses/model.mtl'),
+						require('../assets/models/david/moses/model.jpg'),
+					]}
+					highAccuracyEvents={false}
+					position={[0, 0, 0]}
+					scale={[0,0,0]}
+					rotation={[-90, 0, 0]}
+					type='OBJ'
+					animation={{
+						name: currentAnim,
+						run: currentModel === 2,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: () => {
+							if (currentAnim === 'easeIn'){
+								setCurrentAnim('rotate');
+								setDelay(0)
+								setTimeout(() => {
+									setCurrentAnim('easeOut')
+								}, 5000)
 							}
 						},
 					}}
@@ -100,8 +129,18 @@ ViroAnimations.registerAnimations({
 			scaleY: 0.02,
 			scaleZ: 0.02,
 		},
-		easing: 'EaseIn',
-		duration: 5000,
+		easing: 'Bounce',
+		duration: 7000,
+	},
+	easeOut: {
+		properties: {
+			scaleX: 0,
+			scaleY: 0,
+			scaleZ: 0,
+			opacity: 0
+		},
+		easing: 'Bounce',
+		duration: 3000,
 	},
 });
 export default () => {
