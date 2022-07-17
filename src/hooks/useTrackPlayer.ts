@@ -13,10 +13,7 @@ const setUpTrackPlayer = async (url: string) => {
 	await TrackPlayer.add([{ url }]);
 };
 
-export const useTrackPlayer = (
-	url: string,
-	trackPlayer: typeof TrackPlayer,
-) => {
+export const useTrackPlayer = (url: string) => {
 	const playerState = usePlaybackState();
 
 	useEffect(() => {
