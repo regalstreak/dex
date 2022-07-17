@@ -20,7 +20,7 @@ export const ExploreScreen = ({ navigation }: Props) => {
 					fontSize: 24,
 				}}
 			>
-				Explorables
+				Explore
 			</Text>
 			<Text style={styles.subTitle}>
 				Find these artifacts near you to experience dex AR

@@ -44,7 +44,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 			setDelay(0);
 			setTimeout(() => {
 				setCurrentAnim('easeOut');
-			}, 8000);
+			}, 45000);
 		}
 		if (currentAnim === 'easeOut') {
 			setCurrentAnim('easeIn');
@@ -58,34 +58,41 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 			<ViroARImageMarker
 				target={'targetOne'}
 				onAnchorFound={() => {
-					setCurrentModel(2);
+					setCurrentModel(3);
 					onFirstObjectLoad();
 				}}
 			>
 				<ViroAmbientLight color='#FFFFFF' />
 
 				{/* <Viro3DObject
-					source={require('../assets/models/david/pieta/Pieta_C.obj')}
+					source={require('../assets/models/david/cupid/cupid-bacchus.obj')}
 					resources={[
-						require('../assets/models/david/pieta/Pieta_C.mtl'),
-						require('../assets/models/david/pieta/Pieta_C_Pieta_O_Material_u1_v1.png'),
-						require('../assets/models/david/pieta/internal_ground_ao_texture.jpeg'),
+						require('../assets/models/david/cupid/cupid-bacchus.mtl'),
+						require('../assets/models/david/cupid/A407vv01.jpg'),
 					]}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
 					scale={[50, 50, 50]}
 					rotation={[-90, 0, 0]}
 					type='OBJ'
-					visible={true}
-					// visible={currentModel === 1}
-					// animation={{
-					// 	name: currentAnim,
-					// 	run: currentModel === 1,
-					// 	delay: delay,
-					// 	interruptible: true,
-					// 	loop: currentAnim === 'rotate',
-					// 	onFinish: onFinishCurrentAnim,
-					// }}
+					onLoadEnd={() => {
+						console.log('--------------------------------------------------------------')
+						console.log('--------------------------------------------------------------')
+						console.log('--------------------------------------------------------------')
+						console.log('loaded')
+					}}
+					onError={(e) => {
+						console.log(e, '-------------------------ERROR---------------------------')
+					}}
+					visible={currentModel === 1}
+					animation={{
+						name: currentAnim,
+						run: currentModel === 1,
+						delay: delay,
+						interruptible: true,
+						loop: currentAnim === 'rotate',
+						onFinish: onFinishCurrentAnim,
+					}}
 				/> */}
 				{/* <Viro3DObject
 					source={require('../assets/models/david/bacchus/Bacchus_C.obj')}
@@ -115,6 +122,16 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 						require('../assets/models/david/moses/model.mtl'),
 						require('../assets/models/david/moses/model.jpg'),
 					]}
+					onTouch={(state) => {
+						if(state === 1) {
+							setAnimationPlaying(false)
+						} if (state === 3) {
+							setAnimationPlaying(true)
+						}
+					}}
+					onClick={() => {
+						setAnimationPlaying(!animationPlaying)
+					}}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
 					scale={[0, 0, 0]}
@@ -123,7 +140,7 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 					visible={currentModel === 3}
 					animation={{
 						name: currentAnim,
-						run: currentModel === 3,
+						run: currentModel === 3 && animationPlaying,
 						delay: delay,
 						interruptible: true,
 						loop: currentAnim === 'rotate',
