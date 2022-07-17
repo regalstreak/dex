@@ -1,13 +1,41 @@
 import BottomSheet from '@gorhom/bottom-sheet';
 import { Image, StyleSheet, Text, View } from 'react-native';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react';
 
 import VRScene from '../components/VRScene';
 import COLORS from '../assets/fonts/colors';
 import ArtifactsCarousel from '../components/ArtifactsCarousel';
+import {
+	accelerometer,
+	SensorTypes,
+	setUpdateIntervalForType,
+} from 'react-native-sensors';
+
+setUpdateIntervalForType(SensorTypes.accelerometer, 500);
 
 const VRSceneScreen = () => {
 	const bottomSheetRef = useRef<BottomSheet>(null);
+	const [bottomSheetIndex, setBottomSheetIndex] = useState(0);
+
+	useEffect(() => {
+		const subscription = accelerometer.subscribe(({ y }) => {
+			if (y > 6) {
+				setBottomSheetIndex(0);
+			}
+
+			if (y < 3) {
+				setBottomSheetIndex(1);
+			}
+		});
+
+		return () => subscription.unsubscribe();
+	}, []);
 
 	// variables
 	const snapPoints = useMemo(() => ['30%', '85%'], []);
@@ -21,7 +49,7 @@ const VRSceneScreen = () => {
 			<VRScene />
 			<BottomSheet
 				ref={bottomSheetRef}
-				index={0}
+				index={bottomSheetIndex}
 				snapPoints={snapPoints}
 				onChange={handleSheetChanges}
 				handleStyle={{
