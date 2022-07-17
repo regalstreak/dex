@@ -22,14 +22,14 @@ const HomeScreen = () => {
 				}}
 			/>
 
-			<Text style={{ ...homeScreenStyles.headingText, fontSize: 24 }}>
+			{/* <Text style={{ ...homeScreenStyles.headingText, fontSize: 24 }}>
 				Explorables
 			</Text>
 			<Text style={homeScreenStyles.subTitle}>
 				Find these artifacts near you to experience dex AR
-			</Text>
+			</Text> */}
 
-			<ArtifactsCarousel
+			{/* <ArtifactsCarousel
 				artifactDetails={[
 					{
 						text: 'Roman, 1st century AD Augustus of Prima Porta Museo Chiaramonti',
@@ -48,7 +48,7 @@ const HomeScreen = () => {
 						image: 'https://cdn.discordapp.com/attachments/594962648077041693/997986613680418926/928px-_The_School_of_Athens__by_Raffaello_Sanzio_da_Urbino.jpg',
 					},
 				]}
-			/>
+			/> */}
 		</View>
 	);
 };
@@ -61,7 +61,6 @@ const homeScreenStyles = StyleSheet.create({
 		paddingHorizontal: 16,
 		paddingTop: 32,
 		paddingBottom: 12,
-		justifyContent: 'center',
 		backgroundColor: COLORS.BRAND_COLORS.SLATE_BLACK,
 	},
 

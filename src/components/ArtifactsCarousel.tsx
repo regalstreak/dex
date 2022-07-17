@@ -4,11 +4,13 @@ import {
 	Dimensions,
 	ImageBackground,
 	View,
-	ScrollView,
 	Text,
 	TouchableOpacity,
 } from 'react-native';
-
+import {
+	BottomSheetFlatList,
+	BottomSheetScrollView,
+} from '@gorhom/bottom-sheet';
 
 interface ArtifactsCarouselProps {
 	artifactDetails: {
@@ -19,30 +21,36 @@ interface ArtifactsCarouselProps {
 
 const ArtifactsCarousel = ({ artifactDetails }: ArtifactsCarouselProps) => {
 	return (
-		<ScrollView
+		<BottomSheetFlatList
 			horizontal={true}
 			style={styles.artifactBoxWrapper}
-			contentOffset={{ x: 5, y: 59 }}
-		>
-			{artifactDetails.map(({ text, image }) => (
-				<TouchableOpacity>
-					<ImageBackground
-						source={{
-							uri: image,
-						}}
-						style={styles.artifactBox}
-						key={text}
-						imageStyle={{ borderRadius: 10 }}
-					>
-						<View style={styles.artifactBoxText}>
-							<Text style={{ textAlign: 'center', fontSize: 12 }}>
-								{text}
-							</Text>
-						</View>
-					</ImageBackground>
-				</TouchableOpacity>
-			))}
-		</ScrollView>
+			data={artifactDetails}
+			renderItem={({ item }) => {
+				return (
+					<TouchableOpacity>
+						<ImageBackground
+							source={{
+								uri: item.image,
+							}}
+							style={styles.artifactBox}
+							key={item.text}
+							imageStyle={{ borderRadius: 10 }}
+						>
+							<View style={styles.artifactBoxText}>
+								<Text
+									style={{
+										textAlign: 'center',
+										fontSize: 12,
+									}}
+								>
+									{item.text}
+								</Text>
+							</View>
+						</ImageBackground>
+					</TouchableOpacity>
+				);
+			}}
+		/>
 	);
 };
 
