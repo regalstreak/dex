@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import {
 	ViroARScene,
+	ViroText,
 	ViroTrackingStateConstants,
 	ViroARSceneNavigator,
+
 	ViroARImageMarker,
 	ViroARTrackingTargets,
 	Viro3DObject,
@@ -112,22 +114,20 @@ const HelloWorldSceneAR = ({ onFirstObjectLoad }) => {
 					}}
 				/> */}
 				<Viro3DObject
-					onLoadEnd={onFirstObjectLoad}
 					source={require('../assets/models/david/moses/model.obj')}
 					resources={[
 						require('../assets/models/david/moses/model.mtl'),
 						require('../assets/models/david/moses/model.jpg'),
 					]}
 					onTouch={(state) => {
-						if (state === 1) {
-							setAnimationPlaying(false);
-						}
-						if (state === 3) {
-							setAnimationPlaying(true);
+						if(state === 1) {
+							setAnimationPlaying(false)
+						} if (state === 3) {
+							setAnimationPlaying(true)
 						}
 					}}
 					onClick={() => {
-						setAnimationPlaying(!animationPlaying);
+						setAnimationPlaying(!animationPlaying)
 					}}
 					highAccuracyEvents={false}
 					position={[0, 0, 0]}
