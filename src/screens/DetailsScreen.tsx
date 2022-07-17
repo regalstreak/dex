@@ -22,7 +22,7 @@ export const DetailsScreen = () => {
 			</Text>
 			<View style={{ flexDirection: 'row' }}>
 				<Text style={styles.subTitle}>
-					Notebale Works of Michelangelo
+					Noteable Works of Michelangelo
 				</Text>
 				<View style={{ marginLeft: 'auto' }}>
 					<AudioPlayer

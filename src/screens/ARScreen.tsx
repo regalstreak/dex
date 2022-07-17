@@ -102,18 +102,18 @@ const VRSceneScreen = () => {
 			>
 				<Stack.Navigator>
 					<Stack.Screen
-						options={{
-							title: 'The Vatican Museums',
-						}}
-						name='DetailsScreen'
-						component={DetailsScreen}
-					/>
-					<Stack.Screen
 						name='ExploreScreen'
 						component={ExploreScreen}
 						options={{
 							headerShown: false,
 						}}
+					/>
+					<Stack.Screen
+						options={{
+							title: 'The Vatican Museums',
+						}}
+						name='DetailsScreen'
+						component={DetailsScreen}
 					/>
 				</Stack.Navigator>
 			</BottomSheet>

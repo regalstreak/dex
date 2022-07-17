@@ -68,8 +68,6 @@ export function parseTimestamp(timestamp: string): number {
 const SubTitle = ({ isPlaying, progress }) => {
 	const [text, setText] = React.useState('');
 
-	console.log(result);
-
 	useEffect(() => {
 		const current = result.find((item) => {
 			return (
@@ -80,6 +78,9 @@ const SubTitle = ({ isPlaying, progress }) => {
 
 		setText(current);
 	}, [progress]);
+	if (!isPlaying) {
+		return null;
+	}
 	return (
 		<View
 			style={{
